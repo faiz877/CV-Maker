@@ -1,5 +1,7 @@
 export default function Header() {
   return (
-    <div>Header</div>
-  )
+    <div>
+      <h1 className="text-center">CV Application Maker</h1>
+    </div>
+  );
 }
