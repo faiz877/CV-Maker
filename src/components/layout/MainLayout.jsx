@@ -1,3 +1,9 @@
+import PersonalInfo from "../form/PersonalInfo";
+
 export default function MainLayout() {
-  return <div>MainLayout</div>;
+  return (
+    <div>
+      <PersonalInfo></PersonalInfo>
+    </div>
+  );
 }
