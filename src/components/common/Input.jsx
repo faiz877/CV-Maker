@@ -8,7 +8,7 @@ const Input = ({ label, type, name, value, onChange }) => {
         value={value}
         onChange={onChange}
         id={name}
-        className="input-field"
+        className="input-field border border-black rounded-full"
       />
     </div>
   );
