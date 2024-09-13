@@ -2,12 +2,13 @@ import { useState } from "react";
 import Input from "../common/Input";
 import Button from "../common/Button";
 
-const PersonalInfo = () => {
+export default function PersonalInfo() {
   const [formData, setFormData] = useState({
     name: "",
+    number: "",
     email: "",
-    phone: "",
-    address: "",
+    linkedln: "",
+    github: "",
   });
 
   const handleChange = (e) => {
@@ -16,41 +17,49 @@ const PersonalInfo = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("form submit");
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Input
-        label="Full Name"
-        type="text"
-        name="name"
-        value={formData.name}
-        onChange={handleChange}
-      />
-      <Input
-        label="Email"
-        type="email"
-        name="email"
-        value={formData.email}
-        onChange={handleChange}
-      />
-      <Input
-        label="Phone Number"
-        type="text"
-        name="phone"
-        value={formData.phone}
-        onChange={handleChange}
-      />
-      <Input
-        label="Address"
-        type="text"
-        name="address"
-        value={formData.address}
-        onChange={handleChange}
-      />
-      <Button type="submit" text="Next" />
-    </form>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <Input
+          label="Name"
+          type="text"
+          name="userName"
+          value={formData.name}
+          onChange={handleChange}
+        />
+        <Input
+          label="Number"
+          type="tel"
+          name="userNumber"
+          value={formData.number}
+          onChange={handleChange}
+        />
+        <Input
+          label="Email"
+          type="email"
+          name="userEmail"
+          value={formData.email}
+          onChange={handleChange}
+        />
+        <Input
+          label="Linkedln"
+          type="text"
+          name="userLinkedln"
+          value={formData.linkedln}
+          onChange={handleChange}
+        />
+        <Input
+          label="Github"
+          type="text"
+          name="userGithub"
+          value={formData.github}
+          onChange={handleChange}
+        />
+        <Button type="submit" text="Submit" />
+      </form>
+    </div>
   );
-};
-
-export default PersonalInfo;
+}
