@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Input from "../common/Input";
-import Button from "../common/Buttton";
+import Button from "../common/Button";
 
 const PersonalInfo = () => {
   const [formData, setFormData] = useState({
