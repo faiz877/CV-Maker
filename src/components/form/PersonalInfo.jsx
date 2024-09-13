@@ -26,35 +26,35 @@ export default function PersonalInfo() {
         <Input
           label="Name"
           type="text"
-          name="userName"
+          name="name"
           value={formData.name}
           onChange={handleChange}
         />
         <Input
           label="Number"
           type="tel"
-          name="userNumber"
+          name="number"
           value={formData.number}
           onChange={handleChange}
         />
         <Input
           label="Email"
           type="email"
-          name="userEmail"
+          name="email"
           value={formData.email}
           onChange={handleChange}
         />
         <Input
           label="Linkedln"
           type="text"
-          name="userLinkedln"
+          name="linkedln"
           value={formData.linkedln}
           onChange={handleChange}
         />
         <Input
           label="Github"
           type="text"
-          name="userGithub"
+          name="github"
           value={formData.github}
           onChange={handleChange}
         />
