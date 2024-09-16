@@ -1,62 +1,81 @@
-import React from "react";
-import { Input } from "../Common/Input";
-import { Button } from "../Common/Button";
+import { useState } from "react";
+import Input from "../common/Input";
+import Button from "../common/Button";
 
-const Education = ({ formData, setFormData }) => {
-  const handleChange = (index, e) => {
-    const { name, value } = e.target;
-    const newEducation = [...formData.education];
-    newEducation[index] = { ...newEducation[index], [name]: value };
-    setFormData((prevData) => ({ ...prevData, education: newEducation }));
+export default function Education() {
+  const [formData, setFormData] = useState({
+    institution: "",
+    course: "",
+    location: "",
+    duration: "",
+    grade: "",
+  });
+
+  const [education, setEducation] = useState([]);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    console.log(formData);
   };
 
-  const addEducation = () => {
-    setFormData((prevData) => ({
-      ...prevData,
-      education: [
-        ...prevData.education,
-        { institution: "", degree: "", graduationYear: "" },
-      ],
-    }));
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setEducation((prevEducation) => [...prevEducation, formData]);
+    setFormData({
+      institution: "",
+      course: "",
+      location: "",
+      duration: "",
+      grade: "",
+    });
+    console.log("submit");
   };
-
-  const removeEducation = (index) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      education: prevData.education.filter((_, i) => i !== index),
-    }));
-  };
-
   return (
-    <div className="space-y-4">
-      <h2 className="text-2xl font-bold">Education</h2>
-      {formData.education.map((edu, index) => (
-        <div key={index} className="border p-4 rounded">
-          <Input
-            label="Institution"
-            name="institution"
-            value={edu.institution}
-            onChange={(e) => handleChange(index, e)}
-          />
-          <Input
-            label="Degree"
-            name="degree"
-            value={edu.degree}
-            onChange={(e) => handleChange(index, e)}
-          />
-          <Input
-            label="Graduation Year"
-            name="graduationYear"
-            type="number"
-            value={edu.graduationYear}
-            onChange={(e) => handleChange(index, e)}
-          />
-          <Button onClick={() => removeEducation(index)}>Remove</Button>
-        </div>
-      ))}
-      <Button onClick={addEducation}>Add Education</Button>
+    <div>
+      <Input
+        label="Institution"
+        type="text"
+        name="institution"
+        value={formData.institution}
+        onChange={handleChange}
+      />
+      <Input
+        label="Course"
+        type="text"
+        name="course"
+        value={formData.course}
+        onChange={handleChange}
+      />
+      <Input
+        label="Location"
+        type="text"
+        name="location"
+        value={formData.location}
+        onChange={handleChange}
+      />
+      <Input
+        label="Duration"
+        type="text"
+        name="duration"
+        value={formData.duration}
+        onChange={handleChange}
+      />
+      <Input
+        label="Grade"
+        type="text"
+        name="grade"
+        value={formData.grade}
+        onChange={handleChange}
+      />
+      <Button type="submit" text="Submit" onClick={handleSubmit}></Button>
+
+      <ul>
+        {education.map((item, index) => (
+          <li key={index}>
+            {item.institution} - {item.course} ({item.duration}) - {item.grade}
+          </li>
+        ))}
+      </ul>
     </div>
   );
-};
-
-export default Education;
+}
