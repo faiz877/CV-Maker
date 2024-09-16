@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Input from "../common/Input";
 import Button from "../common/Button";
-import { useCV } from "./CVContext";
+import { useCV } from "../../context/CVContext";
 
 export default function Projects() {
   const { project, addProject } = useCV();
@@ -60,14 +60,6 @@ export default function Projects() {
         />
         <Button type="submit" text="Submit" />
       </form>
-
-      <ul>
-        {project.map((item, index) => (
-          <li key={index}>
-            {item.title} - {item.tech}
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }

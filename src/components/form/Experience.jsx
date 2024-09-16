@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Input from "../common/Input";
 import Button from "../common/Button";
-import { useCV } from "./CVContext";
+import { useCV } from "../../context/CVContext";
 
 export default function Experience() {
   const { experience, addExperience } = useCV();
