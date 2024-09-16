@@ -1,9 +1,10 @@
 import { useState } from "react";
 import Input from "../common/Input";
 import Button from "../common/Button";
+import { useCV } from "./CVContext";
 
 export default function Skills() {
-  const [skills, setSkills] = useState([]);
+  const { skills, addSkills } = useCV();
   const [newSkill, setNewSkill] = useState("");
 
   const handleChange = (e) => {
@@ -12,20 +13,28 @@ export default function Skills() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSkills([...skills, newSkill]);
+    addSkills(newSkill);
     setNewSkill("");
   };
 
   return (
     <div>
-      <Input
-        label="Skills"
-        type="text"
-        name="newSkill"
-        value={newSkill}
-        onChange={handleChange}
-      />
-      <Button type="button" text="Submit" onClick={handleSubmit} />
+      <form onSubmit={handleSubmit}>
+        <Input
+          label="Skills"
+          type="text"
+          name="newSkill"
+          value={newSkill}
+          onChange={handleChange}
+        />
+        <Button type="submit" text="Submit" />
+      </form>
+
+      <ul>
+        {skills.map((skill, index) => (
+          <li key={index}>{skill}</li>
+        ))}
+      </ul>
     </div>
   );
 }

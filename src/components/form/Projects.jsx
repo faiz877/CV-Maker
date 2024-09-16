@@ -1,9 +1,10 @@
 import { useState } from "react";
 import Input from "../common/Input";
 import Button from "../common/Button";
+import { useCV } from "./CVContext";
 
 export default function Projects() {
-  const [project, setProject] = useState([]);
+  const { project, addProject } = useCV();
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -17,7 +18,7 @@ export default function Projects() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setProject([...project, formData]);
+    addProject(formData);
     setFormData({
       title: "",
       description: "",
@@ -28,35 +29,45 @@ export default function Projects() {
 
   return (
     <div>
-      <Input
-        label="Project Title"
-        type="text"
-        name="title"
-        value={formData.title}
-        onChange={handleChange}
-      />
-      <Input
-        label="Project Description"
-        type="text"
-        name="description"
-        value={formData.description}
-        onChange={handleChange}
-      />
-      <Input
-        label="Project Tech"
-        type="text"
-        name="tech"
-        value={formData.tech}
-        onChange={handleChange}
-      />
-      <Input
-        label="Project Info"
-        type="text"
-        name="info"
-        value={formData.info}
-        onChange={handleChange}
-      />
-      <Button type="button" text="Submit" onClick={handleSubmit} />
+      <form onSubmit={handleSubmit}>
+        <Input
+          label="Project Title"
+          type="text"
+          name="title"
+          value={formData.title}
+          onChange={handleChange}
+        />
+        <Input
+          label="Project Description"
+          type="text"
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
+        />
+        <Input
+          label="Project Tech"
+          type="text"
+          name="tech"
+          value={formData.tech}
+          onChange={handleChange}
+        />
+        <Input
+          label="Project Info"
+          type="text"
+          name="info"
+          value={formData.info}
+          onChange={handleChange}
+        />
+        <Button type="submit" text="Submit" />
+      </form>
+
+      <ul>
+        {project.map((item, index) => (
+          <li key={index}>
+            {item.title} - {item.tech}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

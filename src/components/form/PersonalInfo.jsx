@@ -1,18 +1,12 @@
-import { useState } from "react";
 import Input from "../common/Input";
 import Button from "../common/Button";
+import { useCV } from "../../context/CVContext";
 
 export default function PersonalInfo() {
-  const [formData, setFormData] = useState({
-    name: "",
-    number: "",
-    email: "",
-    linkedln: "",
-    github: "",
-  });
+  const { personalInfo, updatePersonalInfo } = useCV();
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    updatePersonalInfo({ ...personalInfo, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
@@ -27,35 +21,35 @@ export default function PersonalInfo() {
           label="Name"
           type="text"
           name="name"
-          value={formData.name}
+          value={personalInfo.name}
           onChange={handleChange}
         />
         <Input
           label="Number"
           type="tel"
           name="number"
-          value={formData.number}
+          value={personalInfo.number}
           onChange={handleChange}
         />
         <Input
           label="Email"
           type="email"
           name="email"
-          value={formData.email}
+          value={personalInfo.email}
           onChange={handleChange}
         />
         <Input
           label="Linkedln"
           type="text"
           name="linkedln"
-          value={formData.linkedln}
+          value={personalInfo.linkedln}
           onChange={handleChange}
         />
         <Input
           label="Github"
           type="text"
           name="github"
-          value={formData.github}
+          value={personalInfo.github}
           onChange={handleChange}
         />
         <Button type="submit" text="Submit" />

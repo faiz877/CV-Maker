@@ -1,9 +1,10 @@
 import { useState } from "react";
 import Input from "../common/Input";
 import Button from "../common/Button";
+import { useCV } from "./CVContext";
 
 export default function Education() {
-  const [education, setEducation] = useState([]);
+  const { education, addEducation } = useCV();
   const [formData, setFormData] = useState({
     institution: "",
     course: "",
@@ -18,7 +19,7 @@ export default function Education() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setEducation((prevEducation) => [...prevEducation, formData]);
+    addEducation(formData);
     setFormData({
       institution: "",
       course: "",
@@ -26,46 +27,48 @@ export default function Education() {
       duration: "",
       grade: "",
     });
-    console.log("submit");
   };
+
   return (
     <div>
-      <Input
-        label="Institution"
-        type="text"
-        name="institution"
-        value={formData.institution}
-        onChange={handleChange}
-      />
-      <Input
-        label="Course"
-        type="text"
-        name="course"
-        value={formData.course}
-        onChange={handleChange}
-      />
-      <Input
-        label="Location"
-        type="text"
-        name="location"
-        value={formData.location}
-        onChange={handleChange}
-      />
-      <Input
-        label="Duration"
-        type="text"
-        name="duration"
-        value={formData.duration}
-        onChange={handleChange}
-      />
-      <Input
-        label="Grade"
-        type="text"
-        name="grade"
-        value={formData.grade}
-        onChange={handleChange}
-      />
-      <Button type="submit" text="Submit" onClick={handleSubmit}></Button>
+      <form onSubmit={handleSubmit}>
+        <Input
+          label="Institution"
+          type="text"
+          name="institution"
+          value={formData.institution}
+          onChange={handleChange}
+        />
+        <Input
+          label="Course"
+          type="text"
+          name="course"
+          value={formData.course}
+          onChange={handleChange}
+        />
+        <Input
+          label="Location"
+          type="text"
+          name="location"
+          value={formData.location}
+          onChange={handleChange}
+        />
+        <Input
+          label="Duration"
+          type="text"
+          name="duration"
+          value={formData.duration}
+          onChange={handleChange}
+        />
+        <Input
+          label="Grade"
+          type="text"
+          name="grade"
+          value={formData.grade}
+          onChange={handleChange}
+        />
+        <Button type="submit" text="Submit" />
+      </form>
 
       <ul>
         {education.map((item, index) => (

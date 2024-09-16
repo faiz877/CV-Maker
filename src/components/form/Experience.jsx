@@ -1,9 +1,10 @@
 import { useState } from "react";
 import Input from "../common/Input";
 import Button from "../common/Button";
+import { useCV } from "./CVContext";
 
 export default function Experience() {
-  const [experience, setExperience] = useState([]);
+  const { experience, addExperience } = useCV();
   const [formData, setFormData] = useState({
     company: "",
     position: "",
@@ -17,7 +18,7 @@ export default function Experience() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setExperience((prevExperience) => [...prevExperience, formData]);
+    addExperience(formData);
     setFormData({
       company: "",
       position: "",
@@ -28,35 +29,45 @@ export default function Experience() {
 
   return (
     <div>
-      <Input
-        label="Company"
-        type="text"
-        name="company"
-        value={formData.company}
-        onChange={handleChange}
-      ></Input>
-      <Input
-        label="Position"
-        type="text"
-        name="position"
-        value={formData.position}
-        onChange={handleChange}
-      ></Input>
-      <Input
-        label="Duration"
-        type="text"
-        name="duration"
-        value={formData.duration}
-        onChange={handleChange}
-      ></Input>
-      <Input
-        label="Contribution"
-        type="text"
-        name="contribution"
-        value={formData.contribution}
-        onChange={handleChange}
-      ></Input>
-      <Button type="button" text="Submit" onClick={handleSubmit}></Button>
+      <form onSubmit={handleSubmit}>
+        <Input
+          label="Company"
+          type="text"
+          name="company"
+          value={formData.company}
+          onChange={handleChange}
+        />
+        <Input
+          label="Position"
+          type="text"
+          name="position"
+          value={formData.position}
+          onChange={handleChange}
+        />
+        <Input
+          label="Duration"
+          type="text"
+          name="duration"
+          value={formData.duration}
+          onChange={handleChange}
+        />
+        <Input
+          label="Contribution"
+          type="text"
+          name="contribution"
+          value={formData.contribution}
+          onChange={handleChange}
+        />
+        <Button type="submit" text="Submit" />
+      </form>
+
+      <ul>
+        {experience.map((item, index) => (
+          <li key={index}>
+            {item.company} - {item.position} ({item.duration})
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
