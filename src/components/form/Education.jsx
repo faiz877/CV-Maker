@@ -3,6 +3,7 @@ import Input from "../common/Input";
 import Button from "../common/Button";
 
 export default function Education() {
+  const [education, setEducation] = useState([]);
   const [formData, setFormData] = useState({
     institution: "",
     course: "",
@@ -10,8 +11,6 @@ export default function Education() {
     duration: "",
     grade: "",
   });
-
-  const [education, setEducation] = useState([]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
